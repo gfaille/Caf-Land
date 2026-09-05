@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan Café - 12x13</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f3efe7;
+      --paper:#fffdf8;
+      --ink:#2b221b;
+      --muted:#6e6259;
+      --line:#cdbca8;
+      --accent:#a35f2d;
+      --accent-2:#e8d4bf;
+      --tile:#fffaf3;
+      --shadow:0 10px 30px rgba(43,34,27,.08);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"DM Sans", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(163,95,45,.08), transparent 28%),
+        linear-gradient(180deg, #f7f3ec 0%, #efe8dd 100%);
+    }
+
+    .page{
+      max-width:1100px;
+      margin:40px auto;
+      background:var(--paper);
+      border:1px solid rgba(43,34,27,.08);
+      box-shadow:var(--shadow);
+      border-radius:24px;
+      overflow:hidden;
+    }
+
+    .header{
+      padding:36px 40px 20px;
+      border-bottom:1px solid rgba(43,34,27,.08);
+      background:
+        linear-gradient(135deg, rgba(163,95,45,.08), rgba(232,212,191,.45));
+    }
+
+    .eyebrow{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-family:"Space Grotesk", sans-serif;
+      font-size:clamp(28px,4vw,48px);
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:740px;
+    }
+
+    .content{
+      padding:28px 40px 40px;
+      display:grid;
+      grid-template-columns: 1.3fr .8fr;
+      gap:28px;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,242,234,.9));
+      border:1px solid rgba(43,34,27,.08);
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .panel h2{
+      margin:0 0 16px;
+      font-family:"Space Grotesk", sans-serif;
+      font-size:22px;
+      letter-spacing:-.03em;
+    }
+
+    .grid-wrap{
+      overflow:auto;
+      padding:8px;
+      background:
+        linear-gradient(180deg, rgba(163,95,45,.04), rgba(163,95,45,0));
+      border-radius:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 70px repeat(12, 1fr);
+      gap:6px;
+      min-width:780px;
+      align-items:stretch;
+    }
+
+    .cell, .label, .top-label{
+      min-height:48px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:12px;
+      line-height:1.15;
+      background:var(--tile);
+      padding:4px;
+    }
+
+    .label, .top-label{
+      font-weight:700;
+      color:var(--muted);
+      background:#f7efe5;
+    }
+
+    .empty{ background: repeating-linear-gradient(135deg, #fffaf3, #fffaf3 8px, #fcf4ea 8px, #fcf4ea 16px); color:#b8aa9b; }
+    .kitchen{ background:#d7e7f2; }
+    .counter{ background:#dcb892; }
+    .eat{ background:#f1d49f; }
+    .relax{ background:#d9e7c2; }
+    .door{ background:#f8c7b0; }
+    .walk{ background:#fff7ed; }
+
+    .legend{
+      display:grid;
+      gap:10px;
+    }
+
+    .legend-item{
+      display:grid;
+      grid-template-columns: 18px 1fr;
+      gap:12px;
+      align-items:center;
+      color:var(--ink);
+      font-size:14px;
+    }
+
+    .swatch{
+      width:18px;
+      height:18px;
+      border-radius:6px;
+      border:1px solid rgba(43,34,27,.12);
+    }
+
+    .notes{
+      margin-top:18px;
+      display:grid;
+      gap:10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .actions{
+      padding:0 40px 36px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:14px 18px;
+      font:700 14px "DM Sans", sans-serif;
+      transition:.2s ease;
+    }
+
+    .primary{
+      background:var(--ink);
+      color:white;
+      box-shadow:0 8px 18px rgba(43,34,27,.16);
+    }
+
+    .primary:hover{ transform:translateY(-2px); }
+    .secondary{
+      background:#efe4d7;
+      color:var(--ink);
+    }
+    .secondary:hover{ transform:translateY(-2px); }
+
+    .footer{
+      padding:0 40px 34px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width: 900px){
+      .content{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media print{
+      body{
+        background:white;
+      }
+      .page{
+        margin:0;
+        max-width:none;
+        border:none;
+        box-shadow:none;
+        border-radius:0;
+      }
+      .actions{
+        display:none;
+      }
+      .panel{
+        break-inside:avoid;
+      }
+      @page{
+        size:A4 portrait;
+        margin:12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="eyebrow">Plan imprimable</div>
+      <h1>Plan du café — 12 x 13</h1>
+      <p class="subtitle">
+        Version propre à imprimer en PDF. Chaque case représente 1 emplacement.
+        Organisation prévue en 3 zones : cuisine, salle à manger, détente.
+      </p>
+    </header>
+
+    <section class="content">
+      <article class="panel">
+        <h2>Grille du plan</h2>
+        <div class="grid-wrap">
+          <div class="grid">
+            <div class="top-label"></div>
+            <div class="top-label">1</div><div class="top-label">2</div><div class="top-label">3</div><div class="top-label">4</div>
+            <div class="top-label">5</div><div class="top-label">6</div><div class="top-label">7</div><div class="top-label">8</div>
+            <div class="top-label">9</div><div class="top-label">10</div><div class="top-label">11</div><div class="top-label">12</div>
+
+            <div class="label">L1</div>
+            <div class="cell kitchen">M1</div><div class="cell kitchen">M2</div><div class="cell kitchen">M3</div><div class="cell kitchen">M4</div>
+            <div class="cell kitchen">M5</div><div class="cell kitchen">M6</div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L2</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell empty"></div><div class="cell empty"></div>
+            <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L3</div>
+            <div class="cell counter">C1</div><div class="cell counter">C2</div><div class="cell counter">C3</div><div class="cell counter">C4</div>
+            <div class="cell counter">C5</div><div class="cell counter">C6</div><div class="cell walk"></div><div class="cell empty"></div>
+            <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L4</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+
+            <div class="label">L5</div>
+            <div class="cell empty"></div><div class="cell eat">R1</div><div class="cell empty"></div><div class="cell eat">R2</div>
+            <div class="cell empty"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell eat">T1</div>
+            <div class="cell empty"></div><div class="cell eat">T2</div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L6</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+
+            <div class="label">L7</div>
+            <div class="cell empty"></div><div class="cell eat">R3</div><div class="cell empty"></div><div class="cell eat">R4</div>
+            <div class="cell empty"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell eat">T3</div>
+            <div class="cell empty"></div><div class="cell eat">T4</div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L8</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+
+            <div class="label">L9</div>
+            <div class="cell empty"></div><div class="cell eat">R5</div><div class="cell empty"></div><div class="cell eat">R6</div>
+            <div class="cell empty"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell eat">T5</div>
+            <div class="cell empty"></div><div class="cell eat">T6</div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L10</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+
+            <div class="label">L11</div>
+            <div class="cell relax">B</div><div class="cell empty"></div><div class="cell relax">A</div><div class="cell empty"></div>
+            <div class="cell relax">P</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+            <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+
+            <div class="label">L12</div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+            <div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div><div class="cell walk"></div>
+
+            <div class="label">L13</div>
+            <div class="cell relax">D1</div><div class="cell relax">D2</div><div class="cell relax">D3</div><div class="cell empty"></div>
+            <div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell door">E</div>
+            <div class="cell door">E</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="panel">
+        <h2>Légende</h2>
+        <div class="legend">
+          <div class="legend-item"><span class="swatch" style="background:#d7e7f2"></span> M = Machines / cuisine</div>
+          <div class="legend-item"><span class="swatch" style="background:#dcb892"></span> C = Comptoir / caisse / vitrine</div>
+          <div class="legend-item"><span class="swatch" style="background:#f1d49f"></span> R = Petite table ronde</div>
+          <div class="legend-item"><span class="swatch" style="background:#f1d49f"></span> T = Table à manger</div>
+          <div class="legend-item"><span class="swatch" style="background:#d9e7c2"></span> B = Billard</div>
+          <div class="legend-item"><span class="swatch" style="background:#d9e7c2"></span> A = Arcade</div>
+          <div class="legend-item"><span class="swatch" style="background:#d9e7c2"></span> P = Pop-corn</div>
+          <div class="legend-item"><span class="swatch" style="background:#d9e7c2"></span> D = Distributeurs</div>
+          <div class="legend-item"><span class="swatch" style="background:#f8c7b0"></span> E = Entrée</div>
+          <div class="legend-item"><span class="swatch" style="background:#fff7ed"></span> Couloir de circulation</div>
+        </div>
+
+        <div class="notes">
+          <div><strong>Zone 1 :</strong> cuisine en haut à gauche.</div>
+          <div><strong>Zone 2 :</strong> salle à manger au centre et à droite.</div>
+          <div><strong>Zone 3 :</strong> détente en bas.</div>
+          <div>Les lignes L4, L6, L8, L10 et L12 servent à garder de la place pour les déplacements.</div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="actions">
+      <button class="primary" onclick="window.print()">Télécharger en PDF</button>
+      <button class="secondary" onclick="copyLegend()">Copier la légende</button>
+    </div>
+
+    <footer class="footer">
+      Astuce : dans la fenêtre d’impression, choisis <strong>“Enregistrer au format PDF”</strong>.
+    </footer>
+  </main>
+
+  <script>
+    function copyLegend() {
+      const text = `
+Plan café 12x13
+M = Machines / cuisine
+C = Comptoir / caisse / vitrine
+R = Petite table ronde
+T = Table à manger
+B = Billard
+A = Arcade
+P = Pop-corn
+D = Distributeurs
+E = Entrée
+      `.trim();
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Légende copiée.");
+      }).catch(() => {
+        alert("Impossible de copier automatiquement.");
+      });
+    }
+  </script>
+</body>
+</html>
